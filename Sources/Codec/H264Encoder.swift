@@ -19,7 +19,8 @@ final class H264Encoder: NSObject {
         "dataRateLimits",
         "enabledHardwareEncoder", // macOS only
         "maxKeyFrameIntervalDuration",
-        "scalingMode"
+        "scalingMode",
+        "expectedFPS"
     ]
 
     static let defaultWidth: Int32 = 480
@@ -114,7 +115,7 @@ final class H264Encoder: NSObject {
 
     var locked: UInt32 = 0
     var lockQueue = DispatchQueue(label: "com.haishinkit.HaishinKit.H264Encoder.lock")
-    var expectedFPS: Float64 = AVMixer.defaultFPS {
+    @objc var expectedFPS: Float64 = AVMixer.defaultFPS {
         didSet {
             guard expectedFPS != oldValue else {
                 return
